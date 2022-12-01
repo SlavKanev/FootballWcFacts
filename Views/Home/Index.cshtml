@@ -27,21 +27,27 @@
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
+        <style>
+            body {
+                background-color:cornsilk;
+            }</style>
+
         @foreach (var fact in Model)
         {
             <div class="carousel-item @(first? "active" : string.Empty)">
-                
+
                 <img class="d-block w-100" style="height:500px"
                  src="@fact.ImageUrl" alt="@fact.Title">
                 <div class="carousel-caption d-none d-md-block">
                     
                 </div>
-                <h4 class="heading" style="text-align: center;">
-                        <a class="btn btn-primary" asp-controller="Fact" asp-action="Details"
+                <h1 class="heading" style="text-align: center;">
+                        <a class="btn btn-primary btn-lg btn-dark" asp-controller="Fact" asp-action="Details"
                    asp-route-id="@fact.Id"> @fact.Title</a>
-                </h4>
+                </h1>
+                <p></p>
             </div>
-            @(first = false);
+           @(first = false);
             
         }
     </div>

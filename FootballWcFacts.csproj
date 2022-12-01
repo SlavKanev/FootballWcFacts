@@ -26,4 +26,8 @@
     <ProjectReference Include="..\FootballWcFacts.Core\FootballWcFacts.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\toastr\" />
+  </ItemGroup>
+
 </Project>
