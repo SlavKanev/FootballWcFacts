@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballWcFacts.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 </head>
@@ -24,21 +25,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-blue"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Fact" asp-action="All">All Facts</a>
+                                <a class="nav-link text-blue"  asp-area="" asp-controller="Fact" asp-action="All">All Facts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Fact" asp-action="Mine">My Facts</a>
+                                <a class="nav-link text-blue" asp-area="" asp-controller="Fact" asp-action="Mine">My Facts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Fact" asp-action="Add">Add Fact</a>
+                                <a class="nav-link text-blue" asp-area="" asp-controller="Fact" asp-action="Add">Add Fact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="Become">Become Author</a>
+                                <a class="nav-link text-blue" asp-area="" asp-controller="Author" asp-action="Become">Become Author</a>
                             </li>
                         }
                     </ul>
