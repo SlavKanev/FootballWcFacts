@@ -1,4 +1,6 @@
-﻿using FootballWcFacts.Core.Models.Fact;
+﻿using FootballWcFacts.Core.Contracts;
+using FootballWcFacts.Core.Models.Fact;
+using FootballWcFacts.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,18 @@ namespace FootballWcFacts.Controllers
     [Authorize]
     public class FactController : Controller
     {
+        private readonly IFactService factService;
+        private readonly IAuthorService authorService;
+
+        public FactController(
+            IFactService _factService,
+            IAuthorService _authorService)
+        {
+            factService = _factService;
+            authorService = _authorService;
+
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
@@ -28,15 +42,43 @@ namespace FootballWcFacts.Controllers
         }
         
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            if ((await authorService.IsAlreadyAnAuthor(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(AuthorController.Become), "Author");
+            }
+
+            var model = new FactModel()
+            {
+                FactTournaments = await factService.AllTournaments()
+            };
+
+            return View(model);
         }
         
         [HttpPost]
         public async Task<IActionResult> Add(FactModel model)
         {
-            int id = 1;
+            if ((await authorService.IsAlreadyAnAuthor(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(AuthorController.Become), "Author");
+            }
+
+            if ((await factService.TournamentExists(model.TournamentId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.TournamentId), "Tournament doesn't exist");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.FactTournaments = await factService.AllTournaments();
+                return View(model);
+            }
+
+            int authorId = await authorService.GetAuthorId(User.Id());
+
+            int id = await factService.Create(model, authorId);
 
             return RedirectToAction(nameof(Details), new { id });
 

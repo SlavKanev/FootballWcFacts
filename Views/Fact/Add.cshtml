@@ -1,8 +1,12 @@
-﻿@model FactModel
-
-@{
+﻿@{
     ViewBag.Title = "Add Fact";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<partial name="_FactFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
