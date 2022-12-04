@@ -8,60 +8,78 @@
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballWcFacts.styles.css" asp-append-version="true" />
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 </head>
 <body>
     <partial name="_UserMessages">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-blue bg-blue border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FWCF</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-blue"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
-                        {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-blue bg-blue border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FWCF</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-blue"  asp-area="" asp-controller="Fact" asp-action="All">All Facts</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-blue" asp-area="" asp-controller="Fact" asp-action="Mine">My Facts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-blue" asp-area="" asp-controller="Fact" asp-action="Add">Add Fact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-blue" asp-area="" asp-controller="Author" asp-action="Become">Become Author</a>
-                            </li>
-                        }
-                    </ul>
-                    <partial name="_LoginPartial" />
+                            @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="All">All Facts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="Mine">My Facts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="Add">Add Fact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Become">Become Author</a>
+                                </li>
+                            }
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+            </nav>
+        </header>
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - Football World Cup Facts
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/toastr/toastr.min.js"></script> 
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; @DateTime.UtcNow.Year - Football World Cup Facts
+            </div>
+        </footer>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/toastr/toastr.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<style>
+    .navbar {
+        height: 80px;
+        padding: 20px 40px;
+        color: #ffffff;
+        background-color: #292c2f;
+        -webkit-box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+        box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+    }
+
+        .navbar .nav-link {
+            cursor: pointer;
+        }
+
+            .navbar .nav-link:hover,
+            .navbar .active {
+                color: #b3cce5 !important;
+            }
+</style>

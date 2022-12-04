@@ -29,7 +29,7 @@
     <div class="carousel-inner ">
         <style>
             body {
-                background-color:cornsilk;
+                background-color:lightslategrey;
             }</style>
 
         @foreach (var fact in Model)
@@ -42,7 +42,7 @@
                     
                 </div>
                 <h1 class="heading" style="text-align: center;">
-                        <a class="btn btn-primary btn-lg btn-dark" asp-controller="Fact" asp-action="Details"
+                        <a class="btn btn-primary mt-3 btn-lg btn-blue" asp-controller="Fact" asp-action="Details"
                    asp-route-id="@fact.Id"> @fact.Title</a>
                 </h1>
                 <p></p>
