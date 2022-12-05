@@ -1,6 +1,7 @@
 ﻿using FootballWcFacts.Core.Contracts;
 using FootballWcFacts.Core.Models.Fact;
 using FootballWcFacts.Extensions;
+using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +23,19 @@ namespace FootballWcFacts.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllFactsQueryModel query)
         {
-            var model = new FactsQueryModel();
-            return View(model);
+            var result = await factService.All(
+                query.Tournament,
+                query.Sorting,
+                query.CurrentPage,
+                AllFactsQueryModel.FactsPerPage);
+
+            query.TotalFactsCount = result.TotalFactsCount;
+            query.Tournaments = await factService.AllTournamentsNames();
+            query.Facts = result.Facts;
+
+            return View(query);
         }
         
         public async Task<IActionResult> Mine()
