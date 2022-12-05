@@ -16,3 +16,20 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbar {
+    height: 80px;
+    padding: 20px 40px;
+    color: #ffffff;
+    background-color: #292c2f;
+    -webkit-box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+    box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+}
+
+    .navbar .nav-link {
+        cursor: pointer;
+    }
+
+        .navbar .nav-link:hover,
+        .navbar .active {
+            color: #b3cce5 !important;
+        }
