@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Football WorldCup Facts</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="icon" href="/favicon.ico" class="img-center"  height="50"  width="50"  >
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballWcFacts.styles.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -15,7 +16,13 @@
     <partial name="_UserMessages">
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-blue bg-blue border-bottom box-shadow mb-3">
+                <a class="collapse.navbar-collapse" href="/icon.png">
+                        <div class="logo-image">
+                            <img src="/favicon-32x32.png" class="">
+                        </div>
+                    </a>
                 <div class="container-fluid">
+                    
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FWCF</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation">
