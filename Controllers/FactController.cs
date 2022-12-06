@@ -40,8 +40,13 @@ namespace FootballWcFacts.Controllers
         
         public async Task<IActionResult> Mine()
         {
-            var model = new FactsQueryModel();
-            return View(model);
+            IEnumerable<FactServiceModel> myFacts;
+            var userId = User.Id();
+
+            int authorId = await authorService.GetAuthorId(userId);
+            myFacts = await factService.AllFactsByAuthorId(authorId);
+
+            return View(myFacts);
         }
 
         [AllowAnonymous]

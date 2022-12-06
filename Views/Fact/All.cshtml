@@ -4,12 +4,15 @@
     ViewBag.Title = "All Facts";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<h2 class="text-center ">@ViewBag.Title</h2>
 
 <form method="get">
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
+            <style>
+                body {
+                    background-color: lightslategrey;
+                }</style>
             <div class="form-group">
                 <label asp-for="Tournament"></label>
                 <select asp-for="Tournament" class="form-control">

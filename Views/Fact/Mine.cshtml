@@ -1,4 +1,4 @@
-﻿@model FactsQueryModel
+﻿@model IEnumerable<FactServiceModel>
 
 @{
     ViewBag.Title = "My Facts";
@@ -6,3 +6,13 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+@if(Model.Any())
+{
+    <div class="row">
+        @foreach (var fact in Model)
+        {
+            <partial name="_FactPartial" model="@fact"></partial>
+        }
+    </div>
+}
