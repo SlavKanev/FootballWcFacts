@@ -5,10 +5,26 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<style>
+    body {
+        background-color: lightslategrey;
+    }</style>
 
 <partial name="_FactFormPartial" model="@Model" />
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }
+<style>
+    body {
+        background-color: lightslategrey;
+    }
+
+    h2 {
+        background-image: conic-gradient(black, black, black);
+        font-size: 50px;
+        font-weight: 600;
+        color: forestgreen;
+        text-shadow: 0px 0px 5px blue, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 20px #b393d3;
+    }
+</style>
