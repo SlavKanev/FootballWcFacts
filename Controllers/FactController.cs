@@ -1,4 +1,5 @@
-﻿using FootballWcFacts.Core.Contracts;
+﻿using FootballWcFacts.Core.Constants;
+using FootballWcFacts.Core.Contracts;
 using FootballWcFacts.Core.Models.Fact;
 using FootballWcFacts.Extensions;
 using FootballWcFacts.Models;
@@ -50,9 +51,16 @@ namespace FootballWcFacts.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int id)
         {
-            var model = new FactDetailsModel();
+            if ((await factService.Exists(id)) == false)
+            {
+                TempData[MessageConstant.ErrorMessage] = "The fact doesn't exist!";
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await factService.FactDetailsById(id);
+
             return View(model);
         }
         
@@ -102,14 +110,63 @@ namespace FootballWcFacts.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new FactModel();
+            if ((await factService.Exists(id)) == false)
+            {
+                RedirectToAction(nameof(All));
+            }
+            if ((await factService.HasAuthorWithId(id, User.Id())) ==false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+            var fact = await factService.FactDetailsById(id);
+            var tournamentId = await factService.GetFactTournamentId(id);
+
+            var model = new FactModel()
+            {
+                Id = id,
+                Title = fact.Title,
+                TournamentId = tournamentId,
+                Description = fact.Description,
+                ImageUrl = fact.ImageUrl,
+                FactTournaments = await factService.AllTournaments()
+            };
+
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, FactModel model)
+        public async Task<IActionResult> Edit(FactModel model)
         {
-            return RedirectToAction(nameof(Details), new { id });
+            if ((await factService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Fact doesn't exist");
+                model.FactTournaments = await factService.AllTournaments();
+
+                return View(model);
+                
+            }
+            if ((await factService.HasAuthorWithId(model.Id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if ((await factService.TournamentExists(model.TournamentId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.TournamentId), "Tournament doesn't exist!");
+                model.FactTournaments = await factService.AllTournaments();
+
+                return View(model);
+            }
+            if (ModelState.IsValid == false)
+            {
+                model.FactTournaments = await factService.AllTournaments();
+                return View(model);
+
+            }
+
+            await factService.Edit(model.Id, model);
+
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
 
 

@@ -5,4 +5,34 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-3">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Fact Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+            <p>@Model.Description</p>
+            <p>Tournament: <b>@Model.Tournament</b></p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-controller="Fact" asp-action="Edit"
+                   asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Fact" asp-action="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Author Info</h5>
+                    <p class="card-text">Email:  @Model.Author.Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -7,6 +7,7 @@
         }</style>
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
             <div class="form-group">
                 <label asp-for="Title" style="color:blue; font-family: Verdana"></label>
                 <input asp-for="Title" class="form-control" placeholder="Title...">
