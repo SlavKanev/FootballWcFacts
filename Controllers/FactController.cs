@@ -169,10 +169,43 @@ namespace FootballWcFacts.Controllers
             return RedirectToAction(nameof(Details), new { model.Id });
         }
 
-
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            if ((await factService.Exists(id)) == false)
+            {
+                RedirectToAction(nameof(All));
+            }
+            if ((await factService.HasAuthorWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+            var fact = await factService.FactDetailsById(id);
+
+            var model = new FactDetailsViewModel()
+            {
+                ImageURL = fact.ImageUrl,
+                Title = fact.Title
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, FactDetailsViewModel model)
+        {
+            if ((await factService.Exists(id)) == false)
+            {
+                RedirectToAction(nameof(All));
+            }
+            if ((await factService.HasAuthorWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await factService.Delete(id);
+
             return RedirectToAction(nameof(All));
         }
 
