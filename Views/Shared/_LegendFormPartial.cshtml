@@ -1,0 +1,53 @@
+﻿@model LegendModel
+
+<div class="row">
+    <style>
+        body {
+            background-color: lightslategrey;
+        }</style>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="FirstName" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="FirstName...">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <input asp-for="LastName" class="form-control" placeholder="LastName...">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nationality" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <input asp-for="Nationality" class="form-control" placeholder="Nationality...">
+                <span asp-validation-for="Nationality" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <textarea asp-for="Description" rows="10" class="form-control" placeholder="Tell us about ....."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PositionId" style="color:darkgreen; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></label>
+                <select asp-for="PositionId" class="form-control">
+                    @foreach (var position in Model.LegendPositions)
+                    {
+                        <option value="@position.Id">@position.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PositionId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Add Legend" />
+            </div>
+        </form>
+    </div>
+</div>
+

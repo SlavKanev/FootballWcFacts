@@ -48,7 +48,7 @@ namespace FootballWcFacts.Controllers
 
             await authorService.Create(userId, model.FavouriteTeam);
 
-            return RedirectToAction("All", "Fact");
+            return RedirectToAction("Add", "Fact");
         }
 
     }
