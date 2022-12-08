@@ -4,7 +4,7 @@ namespace FootballWcFacts.Models
 {
     public class AllFactsQueryModel
     {
-        public const int FactsPerPage = 5;
+        public const int FactsPerPage = 2;
 
         public string? Tournament { get; set; }
 

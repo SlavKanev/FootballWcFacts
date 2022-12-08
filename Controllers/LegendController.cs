@@ -1,6 +1,7 @@
 ﻿using FootballWcFacts.Core.Contracts;
 using FootballWcFacts.Core.Models.Legend;
 using FootballWcFacts.Extensions;
+using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,11 +23,19 @@ namespace FootballWcFacts.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllLegendsQueryModel query)
         {
-            var model = new LegendsQueryModel();
+            var result = await legendService.All(
+                query.Position,
+                query.Sorting,
+                query.CurrentPage,
+                AllLegendsQueryModel.LegendsPerPage);
 
-            return View(model);
+            query.TotalLegendsCount = result.TotalLegendsCount;
+            query.Positions = await legendService.AllPositionsNames();
+            query.Legends = result.Legends;
+
+            return View(query);
         }
                 
         [AllowAnonymous]
