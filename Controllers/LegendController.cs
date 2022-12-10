@@ -1,5 +1,6 @@
 ﻿using FootballWcFacts.Core.Contracts;
 using FootballWcFacts.Core.Models.Legend;
+using FootballWcFacts.Core.Services;
 using FootballWcFacts.Extensions;
 using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +42,13 @@ namespace FootballWcFacts.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var model = new LegendDetailsModel();
+            if ((await legendService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await legendService.LegendDetailsById(id);
+
             return View(model);
         }
 
@@ -92,7 +99,28 @@ namespace FootballWcFacts.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new LegendModel();
+            if ((await legendService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await legendService.HasAuthorWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var legend = await legendService.LegendDetailsById(id);
+            var positionId = await legendService.GetLegendPositionId(id);
+
+            var model = new LegendModel()
+            { 
+                Description= legend.Description,
+                FirstName= legend.FirstName,
+                LastName = legend.LastName,
+                ImageUrl= legend.ImageUrl,
+                Nationality = legend.Nationality,
+                LegendPositions = await legendService.AllPositions()
+            };
 
             return View(model);
         }
@@ -100,7 +128,35 @@ namespace FootballWcFacts.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, LegendModel model)
         {
-            return RedirectToAction(nameof(Details), new { id });
+            if ((await legendService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Legend doesn't exist");
+                model.LegendPositions = await legendService.AllPositions();
+
+                return View(model);
+
+            }
+            if ((await legendService.HasAuthorWithId(model.Id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if ((await legendService.PositionExists(model.PositionId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.PositionId), "Position doesn't exist!");
+                model.LegendPositions = await legendService.AllPositions();
+
+                return View(model);
+            }
+            if (ModelState.IsValid == false)
+            {
+                model.LegendPositions = await legendService.AllPositions();
+                return View(model);
+            }
+
+            await legendService.Edit(model.Id, model);
+
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
 
 

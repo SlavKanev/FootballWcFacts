@@ -1,7 +1,91 @@
 ﻿@model LegendDetailsModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Legend Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-3">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Fact Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:40px;">@Model.FirstName @Model.LastName</p>
+            <p>@Model.Description</p>
+            <p>Position: <b>@Model.Position</b></p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-controller="Legend" asp-action="Edit"
+                   asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Legend" asp-action="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Author Info</h5>
+                    <p class="card-text">Email:  @Model.Author.Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: lightslategrey;
+    }
+
+    h2 {
+        background: linear-gradient(180deg, #4B91F7 0%, white 100%);
+        font-size: 35px;
+        font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        color: cornflowerblue;
+        box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-warning {
+        display: ruby;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 14px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        border-radius: 6px;
+        border: none;
+        color: black;
+        background: linear-gradient(180deg, white 0%, yellow 100%);
+        background-origin: border-box;
+        box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
+    }
+
+    .btn-danger {
+        display: ruby;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 14px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        border-radius: 6px;
+        border: none;
+        color: black;
+        background: linear-gradient(180deg, red 0%, #367AF6 100%);
+        background-origin: border-box;
+        box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
+    }
+</style>
+
