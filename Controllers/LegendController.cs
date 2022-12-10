@@ -1,4 +1,5 @@
 ﻿using FootballWcFacts.Core.Contracts;
+using FootballWcFacts.Core.Models.Fact;
 using FootballWcFacts.Core.Models.Legend;
 using FootballWcFacts.Core.Services;
 using FootballWcFacts.Extensions;
@@ -114,6 +115,7 @@ namespace FootballWcFacts.Controllers
 
             var model = new LegendModel()
             { 
+                Id = id,
                 Description= legend.Description,
                 FirstName= legend.FirstName,
                 LastName = legend.LastName,
@@ -126,7 +128,7 @@ namespace FootballWcFacts.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, LegendModel model)
+        public async Task<IActionResult> Edit(LegendModel model)
         {
             if ((await legendService.Exists(model.Id)) == false)
             {
@@ -160,9 +162,44 @@ namespace FootballWcFacts.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            if ((await legendService.Exists(id)) == false)
+            {
+                RedirectToAction(nameof(All));
+            }
+            if ((await legendService.HasAuthorWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+            var legend = await legendService.LegendDetailsById(id);
+
+            var model = new LegendDetailsViewModel()
+            {
+                FirstName= legend.FirstName,
+                LastName= legend.LastName,
+                ImageUrl= legend.ImageUrl
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, LegendDetailsViewModel model)
+        {
+            if ((await legendService.Exists(id)) == false)
+            {
+                RedirectToAction(nameof(All));
+            }
+            if ((await legendService.HasAuthorWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await legendService.Delete(id);
+
             return RedirectToAction(nameof(All));
         }
 
