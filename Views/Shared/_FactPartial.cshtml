@@ -1,11 +1,10 @@
 ﻿@model FactServiceModel
 
-<div class="col-md-4">
+<div class="col-md-5">
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Fact Image">
         <div class="card-body text-center">
             <h4>@Model.Title</h4>
-            <br />
             <a asp-controller="Fact" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
             @if (this.User.Identity.IsAuthenticated)
@@ -24,25 +23,38 @@
         background-color: lightslategrey;
     }
 
-    .btn-success{
-       display: ruby;
-   flex-direction: column;
-  align-items: center;
-  padding: 6px 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  border-radius: 6px;
-  border: none;
+    .card{
+        max-height:100%;
+        max-width:100%;
+        object-position:left;
+    }
 
-  color: black;
-  background: linear-gradient(180deg, #4B91F7 0%, white 100%);
-   background-origin: border-box;
-  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-  outline: 0;
+    .card-img-top{
+        object-fit:cover;
+    }
 
+    .card-body{
+        background-color: cornflowerblue;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        
+    }
+    .btn-success {
+        display: ruby;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 14px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        border-radius: 6px;
+        border: none;
+        color: black;
+        background: linear-gradient(180deg, #4B91F7 0%, white 100%);
+        background-origin: border-box;
+        box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
     }
 
     .btn-warning {
