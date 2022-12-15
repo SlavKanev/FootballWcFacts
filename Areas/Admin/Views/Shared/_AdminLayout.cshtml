@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Football WorldCup Facts - Administrator</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="icon" href="/favicon.ico" class="img-center" height="50" width="50">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FootballWcFacts.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+</head>
+<body>
+    <partial name="_UserMessages">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-blue bg-blue border-bottom box-shadow mb-8">
+                <a class="collapse.navbar-collapse" asp-controller="Home" asp-action="Index">
+                    <div class="wrapper">
+                        <img src="/favicon-32x32.png" height="40" width="40" style="position:absolute">
+                    </div>
+                </a>
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Author" asp-action="Become">Become a FactAuthor</a>
+                            </li>
+                            @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Stories
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="Mine">My Facts</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="All">All Facts</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Legend" asp-action="All">All Legends</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Create Story
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Fact" asp-action="Add">Add Fact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Legend" asp-action="Add">Add Legend</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="WorldChampions" asp-action="Index">WorldCupChampions</a>
+                                </li>
+
+                            }
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <h1>Administration area</h1>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+
+            <div class="container">
+                &copy; @DateTime.UtcNow.Year - Football World Cup Facts
+            </div>
+        </footer>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/toastr/toastr.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+    footer {
+        text-align: center;
+        background-color: #212121;
+        color: #FFFFFF;
+        height: 50px;
+        position: center;
+        bottom: 0px;
+        overflow: auto;
+        width: 100%;
+    }
+</style>
+
+
+
