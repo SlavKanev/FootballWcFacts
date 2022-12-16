@@ -9,11 +9,6 @@
 <form method="get">
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
-            <style>
-                body {
-                    background-image: url("https://e0.365dm.com/21/10/2048x1152/skysports-world-cup-trophy_5555593.jpg");
-                    margin: 0;
-                }</style>
             <div class="form-group">
                 <label asp-for="Tournament"></label>
                 <select asp-for="Tournament" class="form-control" style="color:forestgreen">
@@ -87,6 +82,11 @@
     <h2 class="text-center">No facts found!</h2>
 }
 <div class="row">
+    <style>
+        .row{
+            display:flex;
+        }
+    </style>
     
     @foreach (var fact in Model.Facts)
     {
@@ -96,6 +96,8 @@
 <style>
     body {
         background-color: lightslategrey;
+        background-image: url("https://e0.365dm.com/21/10/2048x1152/skysports-world-cup-trophy_5555593.jpg");
+        margin: 0;
     }
 
     h2 {
@@ -127,4 +129,5 @@
     .form-group {
         color: orangered;
     }
+    
 </style>
