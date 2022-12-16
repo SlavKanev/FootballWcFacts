@@ -5,6 +5,7 @@ using FootballWcFacts.Extensions;
 using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FootballWcFacts.Areas.Admin.Constants.AdminConstants;
 
 namespace FootballWcFacts.Controllers
 {
@@ -41,6 +42,12 @@ namespace FootballWcFacts.Controllers
         
         public async Task<IActionResult> Mine()
         {
+
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "Fact", new { area = AreaName });
+            }
+
             IEnumerable<FactServiceModel> myFacts;
             var userId = User.Id();
 

@@ -83,7 +83,7 @@
         <footer class="border-top footer text-muted">
 
             <div class="container">
-                &copy; @DateTime.UtcNow.Year - Football World Cup Facts
+                &copy; @DateTime.UtcNow.Year - Football World Cup Facts/Administrator mode
             </div>
         </footer>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -96,13 +96,20 @@
 <style>
     footer {
         text-align: center;
-        background-color: #212121;
-        color: #FFFFFF;
+        text-decoration-color: gold;
+        background-color: blue;
+        color: darkgoldenrod;
         height: 50px;
         position: center;
         bottom: 0px;
         overflow: auto;
         width: 100%;
+        margin-top: auto;
+    }
+    body{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 </style>
 

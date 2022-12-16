@@ -2,6 +2,7 @@
 using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static FootballWcFacts.Areas.Admin.Constants.AdminConstants;
 
 namespace FootballWcFacts.Controllers
 {
@@ -16,6 +17,11 @@ namespace FootballWcFacts.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
             var model = await factService.LastFiveFacts();
 
             return View(model);

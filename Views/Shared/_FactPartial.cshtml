@@ -5,13 +5,13 @@
         <img class="card-img-top" src="@Model.ImageUrl" alt="Fact Image">
         <div class="card-body text-center">
             <h4>@Model.Title</h4>
-            <a asp-controller="Fact" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Fact" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="Fact" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Fact" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-warning">Edit</a>
-                <a asp-controller="Fact" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Fact" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 <p></p>
             }
@@ -24,9 +24,10 @@
     }
 
     .card{
-        max-height:100%;
-        max-width:100%;
-        object-position:left;
+        height: 350px;
+        width: 350px;
+        overflow: auto;
+        margin-bottom: 0px;
     }
 
     .card-img-top{

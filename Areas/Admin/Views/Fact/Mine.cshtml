@@ -1,0 +1,24 @@
+﻿@model MyFactsViewModel
+
+@{
+    ViewBag.Title = "My Facts";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<h4>My Added Facts</h4>
+
+@if (!Model.AddedFacts.Any())
+{
+    <h2 class="text-center">You dont' have facts!</h2>
+}
+
+<div class="row">
+    @foreach (var fact in Model.AddedFacts)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_FactPartial.cshtml", fact)
+    }
+</div>
+
+

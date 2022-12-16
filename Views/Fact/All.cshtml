@@ -7,24 +7,24 @@
 <h2 class="text-center ">@ViewBag.Title</h2>
 
 <form method="get">
-        <div class="row">
-            <div class="form-group col-md-3 d-flex justify-content-between">
-                <style>
-                    body {
-                        background-image: url("https://e0.365dm.com/21/10/2048x1152/skysports-world-cup-trophy_5555593.jpg");
-                        margin: 0;
-                    }</style>
-                <div class="form-group">
-                    <label asp-for="Tournament"></label>
-                    <select asp-for="Tournament" class="form-control" style="color:forestgreen">
-                        <option value="">All</option>
-                        @foreach (var tournament in Model.Tournaments)
-                        {
-                            <option value="@tournament">@tournament</option>
-                        }
-                    </select>
-                </div>
+    <div class="row">
+        <div class="form-group col-md-3 d-flex justify-content-between">
+            <style>
+                body {
+                    background-image: url("https://e0.365dm.com/21/10/2048x1152/skysports-world-cup-trophy_5555593.jpg");
+                    margin: 0;
+                }</style>
+            <div class="form-group">
+                <label asp-for="Tournament"></label>
+                <select asp-for="Tournament" class="form-control" style="color:forestgreen">
+                    <option value="">All</option>
+                    @foreach (var tournament in Model.Tournaments)
+                    {
+                        <option value="@tournament">@tournament</option>
+                    }
+                </select>
             </div>
+        </div>
 
         <div class="form-group col-md-3">
             <div class="form-group">
@@ -86,8 +86,8 @@
 {
     <h2 class="text-center">No facts found!</h2>
 }
-
 <div class="row">
+    
     @foreach (var fact in Model.Facts)
     {
         <partial name="_FactPartial" model="@fact" />
@@ -124,7 +124,6 @@
         box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
         outline: 0;
     }
-
     .form-group {
         color: orangered;
     }
