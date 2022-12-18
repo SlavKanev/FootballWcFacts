@@ -9,12 +9,19 @@ using static FootballWcFacts.Areas.Admin.Constants.AdminConstants;
 
 namespace FootballWcFacts.Controllers
 {
+    /// <summary>
+    /// Fact controller
+    /// </summary>
     [Authorize]
     public class FactController : Controller
     {
         private readonly IFactService factService;
         private readonly IAuthorService authorService;
-
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="_factService"></param>
+        /// <param name="_authorService"></param>
         public FactController(
             IFactService _factService,
             IAuthorService _authorService)
@@ -23,7 +30,11 @@ namespace FootballWcFacts.Controllers
             authorService = _authorService;
 
         }
-
+        /// <summary>
+        /// Gets all facts
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>view</returns>
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery] AllFactsQueryModel query)
         {
@@ -39,7 +50,10 @@ namespace FootballWcFacts.Controllers
 
             return View(query);
         }
-        
+        /// <summary>
+        /// Gets all mine facts
+        /// </summary>
+        /// <returns>view</returns>
         public async Task<IActionResult> Mine()
         {
 
@@ -56,7 +70,11 @@ namespace FootballWcFacts.Controllers
 
             return View(myFacts);
         }
-
+        /// <summary>
+        /// Gets facts details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>view</returns>
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
@@ -70,7 +88,10 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-        
+        /// <summary>
+        /// Adds a story to the collection
+        /// </summary>
+        /// <returns>view</returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -86,7 +107,11 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-        
+        /// <summary>
+        /// Adds a fact
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>view</returns>
         [HttpPost]
         public async Task<IActionResult> Add(FactModel model)
         {
@@ -113,7 +138,11 @@ namespace FootballWcFacts.Controllers
             return RedirectToAction(nameof(Details), new { id });
 
         }
-
+        /// <summary>
+        /// Edits a fact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>view</returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -140,7 +169,11 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Edits a fact story
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>model</returns>
         [HttpPost]
         public async Task<IActionResult> Edit(FactModel model)
         {
@@ -175,7 +208,11 @@ namespace FootballWcFacts.Controllers
 
             return RedirectToAction(nameof(Details), new { model.Id });
         }
-
+        /// <summary>
+        /// Deletes a fact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>view</returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -198,7 +235,12 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Deletes a fact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>redirect to action</returns>
         [HttpPost]
         public async Task<IActionResult> Delete(int id, FactDetailsViewModel model)
         {

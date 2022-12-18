@@ -7,15 +7,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballWcFacts.Controllers
 {
+    /// <summary>
+    /// Author controller
+    /// </summary>
     [Authorize]
     public class AuthorController : Controller
     {
         private readonly IAuthorService authorService;
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="_authorService"></param>
         public AuthorController(IAuthorService _authorService)
         {
             authorService = _authorService;  
         }
-
+        /// <summary>
+        /// Become an author
+        /// </summary>
+        /// <returns>view</returns>
         [HttpGet]
         public async Task<IActionResult> Become()
         {
@@ -29,7 +39,11 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Become an author
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>redirect to action</returns>
         [HttpPost]
         public async Task<IActionResult> Become(BecomeAuthorModel model)
         {

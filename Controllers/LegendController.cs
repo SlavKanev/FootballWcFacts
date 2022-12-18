@@ -1,7 +1,5 @@
 ﻿using FootballWcFacts.Core.Contracts;
-using FootballWcFacts.Core.Models.Fact;
 using FootballWcFacts.Core.Models.Legend;
-using FootballWcFacts.Core.Services;
 using FootballWcFacts.Extensions;
 using FootballWcFacts.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballWcFacts.Controllers
 {
+    /// <summary>
+    /// Legends controller
+    /// </summary>
     [Authorize]
     public class LegendController : Controller
     {
@@ -16,6 +17,11 @@ namespace FootballWcFacts.Controllers
         private readonly ILegendService legendService;
         private readonly IAuthorService authorService;
 
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="_legendService"></param>
+        /// <param name="_authorService"></param>
         public LegendController(
             ILegendService _legendService,
             IAuthorService _authorService)
@@ -23,7 +29,11 @@ namespace FootballWcFacts.Controllers
             legendService = _legendService;
             authorService = _authorService;
         }
-
+        /// <summary>
+        /// Gets all legends
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>view</returns>
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery] AllLegendsQueryModel query)
         {
@@ -39,7 +49,11 @@ namespace FootballWcFacts.Controllers
 
             return View(query);
         }
-                
+                /// <summary>
+                /// Gets legends details
+                /// </summary>
+                /// <param name="id"></param>
+                /// <returns>view</returns>
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
@@ -52,7 +66,10 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Adds a legend story
+        /// </summary>
+        /// <returns>view</returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -67,7 +84,11 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Adds a legend
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>view</returns>
         [HttpPost]
         public async Task<IActionResult> Add(LegendModel model)
         {
@@ -96,7 +117,11 @@ namespace FootballWcFacts.Controllers
             return RedirectToAction(nameof(Details), new { id });
 
         }
-
+        /// <summary>
+        /// Edits a legend story
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -126,7 +151,11 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Edits a story
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>model</returns>
         [HttpPost]
         public async Task<IActionResult> Edit(LegendModel model)
         {
@@ -161,7 +190,11 @@ namespace FootballWcFacts.Controllers
             return RedirectToAction(nameof(Details), new { model.Id });
         }
 
-
+        /// <summary>
+        /// Deletes a story
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View</returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -185,7 +218,12 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Deletes a story
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>redirect to action</returns>
         [HttpPost]
         public async Task<IActionResult> Delete(int id, LegendDetailsViewModel model)
         {

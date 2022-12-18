@@ -6,15 +6,24 @@ using static FootballWcFacts.Areas.Admin.Constants.AdminConstants;
 
 namespace FootballWcFacts.Controllers
 {
+    /// <summary>
+    /// Home controller
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly IFactService factService;
-
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="_factService"></param>
         public HomeController(IFactService _factService)
         {
             factService= _factService;
         }
-
+        /// <summary>
+        /// Action index
+        /// </summary>
+        /// <returns>view</returns>
         public async Task<IActionResult> Index()
         {
 
@@ -26,7 +35,10 @@ namespace FootballWcFacts.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// Errors action
+        /// </summary>
+        /// <returns>view</returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
